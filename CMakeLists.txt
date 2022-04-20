@@ -214,7 +214,6 @@ else ()
              -Wmissing-declarations \
              -Wmissing-noreturn \
              -Wnon-virtual-dtor \
-             -Wold-style-cast \
              -Woverloaded-virtual \
              -Wpedantic \
              -Wsuggest-override \
@@ -244,7 +243,7 @@ endif ()
 
 #set(THREADS_USE_PTHREADS_WIN32 True)
 set(CMAKE_THREAD_PREFER_PTHREAD True)
-find_package(Threads REQUIRED)
+#find_package(Threads REQUIRED)
 
 find_package(ZLIB REQUIRED)
 

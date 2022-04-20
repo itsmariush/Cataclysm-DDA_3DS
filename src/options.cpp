@@ -2058,7 +2058,11 @@ void options_manager::add_options_graphics()
     add_empty_line();
 
 #if defined(TILES)
+#if defined(__3DS__)
+    std::vector<options_manager::id_and_option> display_list ={{ "0", to_translation( "Display 0" ) }};
+#else
     std::vector<options_manager::id_and_option> display_list = cata_tiles::build_display_list();
+#endif
     add( "DISPLAY", "graphics", to_translation( "Display" ),
          to_translation( "Sets which video display will be used to show the game.  Requires restart." ),
          display_list,

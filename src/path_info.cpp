@@ -70,6 +70,9 @@ void PATH_INFO::init_user_dir( std::string dir )
             user_dir = getenv( "HOME" );
             dir = std::string( user_dir ) + "/.local/share/cataclysm-dda/";
         }
+#elif defined(__3DS__)
+        // TODO: 
+        dir = std::string("/cataclysm-dda/");
 #else
         user_dir = getenv( "HOME" );
         dir = std::string( user_dir ) + "/.cataclysm-dda/";

@@ -187,6 +187,7 @@ static void InitSDL()
     ret = SDL_Init( init_flags );
     throwErrorIf( ret != 0, "SDL_Init failed" );
 
+
     ret = TTF_Init();
     throwErrorIf( ret != 0, "TTF_Init failed" );
 

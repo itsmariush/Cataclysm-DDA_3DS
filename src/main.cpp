@@ -60,6 +60,7 @@ class ui_adaptor;
 #   endif
 #endif
 
+
 #if defined(__ANDROID__)
 #include <SDL_filesystem.h>
 #include <SDL_keyboard.h>
@@ -67,11 +68,13 @@ class ui_adaptor;
 #include <android/log.h>
 #include <unistd.h>
 
+
 // Taken from: https://codelab.wordpress.com/2014/11/03/how-to-use-standard-output-streams-for-logging-in-android-apps/
 // Force Android standard output to adb logcat output
 
 static int pfd[2];
-static pthread_t thr;
+//static pthread_t thr;
+static void* thr;
 static const char *tag = "cdda";
 
 static void *thread_func( void * )
@@ -104,10 +107,10 @@ int start_logger( const char *app_name )
     dup2( pfd[1], 2 );
 
     /* spawn the logging thread */
-    if( pthread_create( &thr, 0, thread_func, 0 ) == -1 ) {
-        return -1;
+    //if( pthread_create( &thr, 0, thread_func, 0 ) == -1 ) {
+     //   return -1;
     }
-    pthread_detach( thr );
+    //pthread_detach( thr );
     return 0;
 }
 
@@ -611,8 +614,12 @@ int main( int argc, const char *argv[] )
 
     MAP_SHARING::setDefaults();
 
+#if defined(__3DS__)
+    char *ds_argv[1] = {"cataclysm-tiles"}; 
+    cli_opts cli = parse_commandline( 1, const_cast<const char **>( ds_argv ) );
+#else
     cli_opts cli = parse_commandline( argc, const_cast<const char **>( argv ) );
-
+#endif
     if( !dir_exist( PATH_INFO::datadir() ) ) {
         printf( "Fatal: Can't find data directory \"%s\"\nPlease ensure the current working directory is correct or specify data directory with --datadir.  Perhaps you meant to start \"cataclysm-launcher\"?\n",
                 PATH_INFO::datadir().c_str() );
@@ -675,7 +682,7 @@ int main( int argc, const char *argv[] )
     get_options().init();
     get_options().load();
 #endif
-
+    
     // in test mode don't initialize curses to avoid escape sequences being inserted into output stream
     if( !test_mode ) {
         try {
@@ -733,11 +740,11 @@ int main( int argc, const char *argv[] )
     catacurses::curs_set( 0 ); // Invisible cursor here, because MAPBUFFER.load() is crash-prone
 
 #if !defined(_WIN32)
-    struct sigaction sigIntHandler;
-    sigIntHandler.sa_handler = exit_handler;
-    sigemptyset( &sigIntHandler.sa_mask );
-    sigIntHandler.sa_flags = 0;
-    sigaction( SIGINT, &sigIntHandler, nullptr );
+    //struct sigaction sigIntHandler;
+    //sigIntHandler.sa_handler = exit_handler;
+    //sigemptyset( &sigIntHandler.sa_mask );
+    //sigIntHandler.sa_flags = 0;
+    //sigaction( SIGINT, &sigIntHandler, nullptr );
 #endif
 
 #if defined(LOCALIZE)

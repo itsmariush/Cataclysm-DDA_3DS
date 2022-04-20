@@ -354,7 +354,19 @@ std::istream &safe_getline( std::istream &ins, std::string &str )
 
 bool read_from_file( const std::string &path, const std::function<void( std::istream & )> &reader )
 {
+
     try {
+        
+#if defined(__3DS__)
+
+        
+        std::filebuf fb;
+        if (fb.open (path ,std::ios::binary))
+        {
+            std::istream is(&fb);
+            reader(is);
+        }
+#else
         cata::ifstream fin( fs::u8path( path ), std::ios::binary );
         if( !fin ) {
             throw std::runtime_error( "opening file failed" );
@@ -421,6 +433,7 @@ bool read_from_file( const std::string &path, const std::function<void( std::ist
         if( fin.bad() ) {
             throw std::runtime_error( "reading file failed" );
         }
+#endif
         return true;
 
     } catch( const std::exception &err ) {

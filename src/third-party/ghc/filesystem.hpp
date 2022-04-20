@@ -78,7 +78,7 @@
 #define GHC_OS_QNX
 #define GHC_NO_DIRENT_D_TYPE
 #else
-#error "Operating system currently not supported!"
+//#error "Operating system currently not supported!"
 #endif
 #define GHC_OS_DETECTED
 #if (defined(_MSVC_LANG) && _MSVC_LANG >= 201703L)
