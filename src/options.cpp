@@ -1363,7 +1363,7 @@ void options_manager::add_options_general()
 
     add( "SOUND_ENABLED", "general", to_translation( "Sound Enabled" ),
          to_translation( "If true, music and sound are enabled." ),
-         true, COPT_NO_SOUND_HIDE
+         false, COPT_NO_SOUND_HIDE
        );
 
     add( "SOUNDPACKS", "general", to_translation( "Choose soundpack" ),

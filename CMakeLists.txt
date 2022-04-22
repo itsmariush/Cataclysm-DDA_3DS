@@ -208,7 +208,7 @@ if (MSVC)
     endif ()
 else ()
     set(CATA_WARNINGS
-            "-Werror -Wall -Wextra \
+            "-Werror -Wextra \
              -Wformat-signedness \
              -Wlogical-op \
              -Wmissing-declarations \

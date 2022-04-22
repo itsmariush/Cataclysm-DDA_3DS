@@ -60,6 +60,10 @@ class ui_adaptor;
 #   endif
 #endif
 
+#if defined(__3DS__)
+unsigned int __stacksize__=8*1024*1024;
+#endif
+
 
 #if defined(__ANDROID__)
 #include <SDL_filesystem.h>
@@ -615,7 +619,8 @@ int main( int argc, const char *argv[] )
     MAP_SHARING::setDefaults();
 
 #if defined(__3DS__)
-    char *ds_argv[1] = {"cataclysm-tiles"}; 
+
+    char const *ds_argv[1] = {"cataclysm-tiles"}; 
     cli_opts cli = parse_commandline( 1, const_cast<const char **>( ds_argv ) );
 #else
     cli_opts cli = parse_commandline( argc, const_cast<const char **>( argv ) );

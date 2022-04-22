@@ -55,7 +55,9 @@ void PATH_INFO::init_base_path( std::string path )
 void PATH_INFO::init_user_dir( std::string dir )
 {
     if( dir.empty() ) {
+#if !defined(__3DS__)
         const char *user_dir;
+#endif
 #if defined(_WIN32)
         user_dir = getenv( "LOCALAPPDATA" );
         // On Windows userdir without dot

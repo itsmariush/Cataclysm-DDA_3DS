@@ -357,21 +357,11 @@ bool read_from_file( const std::string &path, const std::function<void( std::ist
 
     try {
         
-#if defined(__3DS__)
-
-        
-        std::filebuf fb;
-        if (fb.open (path ,std::ios::binary))
-        {
-            std::istream is(&fb);
-            reader(is);
-        }
-#else
-        cata::ifstream fin( fs::u8path( path ), std::ios::binary );
+        auto p = fs::u8path(path); 
+        cata::ifstream fin(  path , std::ios::binary );
         if( !fin ) {
             throw std::runtime_error( "opening file failed" );
         }
-
         // check if file is gzipped
         // (byte1 == 0x1f) && (byte2 == 0x8b)
         char header[2];
@@ -433,7 +423,6 @@ bool read_from_file( const std::string &path, const std::function<void( std::ist
         if( fin.bad() ) {
             throw std::runtime_error( "reading file failed" );
         }
-#endif
         return true;
 
     } catch( const std::exception &err ) {
