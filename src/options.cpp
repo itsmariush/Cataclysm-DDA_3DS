@@ -1538,7 +1538,7 @@ void options_manager::add_options_graphics()
          0, 10000, 0, COPT_CURSES_HIDE
        );
 
-#ifndef __ANDROID__ // Android is always fullscreen
+#if !defined __ANDROID__ && !defined __3DS__ // Android is always fullscreen
     add( "FULLSCREEN", "graphics", translate_marker( "Fullscreen" ),
          translate_marker( "Starts Cataclysm in one of the fullscreen modes.  Requires restart." ),
     { { "no", translate_marker( "No" ) }, { "fullscreen", translate_marker( "Fullscreen" ) }, { "windowedbl", translate_marker( "Windowed borderless" ) } },
