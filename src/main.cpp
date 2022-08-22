@@ -170,6 +170,7 @@ int main( int argc, char *argv[] )
     PATH_INFO::set_standard_filenames();
 
     MAP_SHARING::setDefaults();
+#if !defined __3DS__
     {
         const char *section_default = nullptr;
         const char *section_map_sharing = "Map sharing";
@@ -529,7 +530,12 @@ int main( int argc, char *argv[] )
             }
         }
     }
+#endif
 
+#if defined __3DS__
+    PATH_INFO::update_pathname( "datadir", "/data/");
+    PATH_INFO::update_datadir();
+#endif
     if( !dir_exist( FILENAMES["datadir"] ) ) {
         printf( "Fatal: Can't find directory \"%s\"\nPlease ensure the current working directory is correct. Perhaps you meant to start \"cataclysm-launcher\"?\n",
                 FILENAMES["datadir"].c_str() );
@@ -636,7 +642,7 @@ int main( int argc, char *argv[] )
 
     catacurses::curs_set( 0 ); // Invisible cursor here, because MAPBUFFER.load() is crash-prone
 
-#if (!(defined _WIN32 || defined WINDOWS))
+#if (!(defined _WIN32 || defined WINDOWS)) && !defined __3DS__
     struct sigaction sigIntHandler;
     sigIntHandler.sa_handler = exit_handler;
     sigemptyset( &sigIntHandler.sa_mask );

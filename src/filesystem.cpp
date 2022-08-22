@@ -169,7 +169,7 @@ void for_each_dir_entry( const std::string &path, Function function )
 }
 
 //--------------------------------------------------------------------------------------------------
-#if !defined (_WIN32) && !defined (__WIN32__)
+#if !defined (_WIN32) && !defined (__WIN32__) && !defined(__3DS__)
 std::string resolve_path( const std::string &full_path )
 {
     const auto result_str = realpath( full_path.c_str(), nullptr );
@@ -203,7 +203,7 @@ bool is_directory_stat( const std::string &full_path )
         return true;
     }
 
-#if !defined (_WIN32) && !defined (__WIN32__)
+#if !defined (_WIN32) && !defined (__WIN32__) && !defined(__3DS__)
     if( S_ISLNK( result.st_mode ) ) {
         return is_directory_stat( resolve_path( full_path ) );
     }
@@ -229,7 +229,7 @@ bool is_directory( const dirent &entry, const std::string &full_path )
         return true;
     }
 
-#if !defined (_WIN32) && !defined (__WIN32__)
+#if !defined (_WIN32) && !defined (__WIN32__) && !defined(__3DS__)
     if( entry.d_type == DT_LNK ) {
         return is_directory_stat( resolve_path( full_path ) );
     }
@@ -258,7 +258,11 @@ bool is_special_dir( const dirent &entry )
 //--------------------------------------------------------------------------------------------------
 bool name_contains( const dirent &entry, const std::string &match, const bool at_end )
 {
+#if defined __3DS__
+    const auto len_fname = strlen( entry.d_name );
+#else
     const auto len_fname = strnlen( entry.d_name, sizeof_array( entry.d_name ) );
+#endif
     const auto len_match = match.length();
 
     if( len_match > len_fname ) {
