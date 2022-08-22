@@ -339,7 +339,7 @@ void WinCreate()
         SDL_SetHint( SDL_HINT_RENDER_SCALE_QUALITY, get_option<std::string>( "SCALING_MODE" ).c_str() );
     }
 
-#ifndef __ANDROID__
+#if !defined __ANDROID__ && !defined __3DS__
     if (get_option<std::string>( "FULLSCREEN" ) == "fullscreen") {
         window_flags |= SDL_WINDOW_FULLSCREEN;
     } else if (get_option<std::string>( "FULLSCREEN" ) == "windowedbl") {

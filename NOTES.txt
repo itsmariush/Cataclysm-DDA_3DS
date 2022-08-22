@@ -1,0 +1,2 @@
+- investigate Reading OOB in options_manager::init()/load()
+- investigate Reading OOB in WinCreate()
