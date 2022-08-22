@@ -794,11 +794,15 @@ void set_displaybuffer_rendertarget()
 void find_videodisplays() {
     std::map<int, std::string> displays;
 
+#if !defined __3DS__
     int numdisplays = SDL_GetNumVideoDisplays();
     for( int i = 0 ; i < numdisplays ; i++ ) {
         displays.insert( { i, SDL_GetDisplayName( i ) } );
     }
-
+#else
+    displays.insert( { 0, SDL_GetDisplayName( 2 ) } );
+    displays.insert( { 1, SDL_GetDisplayName( 3 ) } );
+#endif
     int current_display = get_option<int>( "DISPLAY" );
     get_options().add("DISPLAY", "graphics", _("Display"),
                       _("Sets which video display will be used to show the game. Requires restart."),
