@@ -2807,7 +2807,7 @@ static void font_folder_list(std::ofstream& fout, const std::string &path, std::
                 }
 
                 // Add font family
-                char *fami = TTF_FontFaceFamilyName( fnt.get() );
+                const char *fami = TTF_FontFaceFamilyName( fnt.get() );
                 if (fami != NULL) {
                     fout << fami;
                 } else {
@@ -2815,7 +2815,7 @@ static void font_folder_list(std::ofstream& fout, const std::string &path, std::
                 }
 
                 // Add font style
-                char *style = TTF_FontFaceStyleName( fnt.get() );
+                const char *style = TTF_FontFaceStyleName( fnt.get() );
                 bool isbitmap = ends_with(f, ".fon");
                 if (style != NULL && !isbitmap && strcasecmp(style, "Regular") != 0) {
                     fout << " " << style;
@@ -2926,12 +2926,12 @@ static int test_face_size( const std::string &f, int size, int faceIndex )
 {
     const TTF_Font_Ptr fnt( TTF_OpenFontIndex( f.c_str(), size, faceIndex ) );
     if( fnt ) {
-        char* style = TTF_FontFaceStyleName( fnt.get() );
+        const char* style = TTF_FontFaceStyleName( fnt.get() );
         if(style != NULL) {
             int faces = TTF_FontFaces( fnt.get() );
             for(int i = faces - 1; i >= 0; i--) {
                 const TTF_Font_Ptr tf( TTF_OpenFontIndex( f.c_str(), size, i ) );
-                char* ts = NULL;
+                const char* ts = NULL;
                 if( tf ) {
                    if( NULL != ( ts = TTF_FontFaceStyleName( tf.get() ) ) ) {
                        if( 0 == strcasecmp( ts, style ) && TTF_FontHeight( tf.get() ) <= size ) {
