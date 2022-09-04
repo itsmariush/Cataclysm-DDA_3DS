@@ -2968,7 +2968,7 @@ void init_term_size_and_scaling_factor()
     int terminal_x = get_option<int>( "TERMINAL_X" );
     int terminal_y = get_option<int>( "TERMINAL_Y" );
 
-#ifndef __ANDROID__
+#if !defined __ANDROID__ && !defined __3DS__
 
     if( get_option<std::string>( "SCALING_FACTOR" ) == "2" ) {
         scaling_factor = 2;
@@ -3055,7 +3055,7 @@ void init_term_size_and_scaling_factor()
         get_options().save();
     }
 
-#endif //__ANDROID__
+#endif //__ANDROID__ && __3DS__
 
     TERMINAL_WIDTH = terminal_x / scaling_factor;
     TERMINAL_HEIGHT = terminal_y / scaling_factor;

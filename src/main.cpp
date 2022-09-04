@@ -29,6 +29,10 @@
 #include "rng.h"
 #include "translations.h"
 
+#ifdef __3DS__
+    unsigned int __stacksize__=8*1024*1024;
+#endif
+
 #ifdef TILES
 #   if defined(_MSC_VER) && defined(USE_VCPKG)
 #      include <SDL2/SDL_version.h>

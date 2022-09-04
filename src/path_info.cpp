@@ -71,7 +71,7 @@ void PATH_INFO::update_pathname( const std::string &name, const std::string &pat
 void PATH_INFO::update_datadir()
 {
     // Shared dirs
-    update_pathname( "gfxdir", FILENAMES["datadir"] + "gfx/" );
+    update_pathname( "gfxdir", FILENAMES["datadir"] + "gfx" );
     update_pathname( "luadir", FILENAMES["datadir"] + "lua/" );
     update_pathname( "fontdir", FILENAMES["datadir"] + "font/" );
     update_pathname( "rawdir", FILENAMES["datadir"] + "raw/" );
@@ -127,16 +127,16 @@ void PATH_INFO::set_standard_filenames()
     if( !FILENAMES["base_path"].empty() ) {
 #ifdef DATA_DIR_PREFIX
         update_pathname( "datadir", FILENAMES["base_path"] + "share/cataclysm-dda/" );
-        update_pathname( "gfxdir", FILENAMES["datadir"] + "gfx/" );
+        update_pathname( "gfxdir", FILENAMES["datadir"] + "gfx" );
         update_pathname( "luadir", FILENAMES["datadir"] + "lua/" );
 #else
         update_pathname( "datadir", FILENAMES["base_path"] + "data/" );
-        update_pathname( "gfxdir", FILENAMES["base_path"] + "gfx/" );
+        update_pathname( "gfxdir", FILENAMES["base_path"] + "gfx" );
         update_pathname( "luadir", FILENAMES["base_path"] + "lua/" );
 #endif
     } else {
         update_pathname( "datadir", "data/" );
-        update_pathname( "gfxdir", "gfx/" );
+        update_pathname( "gfxdir", "gfx" );
         update_pathname( "luadir", "lua/" );
     }
 

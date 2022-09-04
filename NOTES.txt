@@ -1,2 +1,3 @@
-- investigate Reading OOB in options_manager::init()/load()
+- investigate Reading OOB in options_manager::init()/load() -> options_manager::add_options_graphics()->build_tilesets_list()->build_resource_list()
 - investigate Reading OOB in WinCreate()
+- Failed to read files ( but can write to debug.log)
