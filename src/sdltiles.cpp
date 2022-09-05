@@ -365,6 +365,10 @@ void WinCreate()
     SDL_SetHint(SDL_HINT_ANDROID_SEPARATE_MOUSE_AND_TOUCH, "1");
 #endif
 
+#ifdef __3DS__
+    ::window.reset(
+            SDL_CreateWindow("Game", 0, 0, 640, 384, SDL_WINDOW_RESIZABLE | SDL_WINDOW_ALLOW_HIGHDPI | SDL_WINDOW_MAXIMIZED));
+#else
     ::window.reset( SDL_CreateWindow( version.c_str(),
             SDL_WINDOWPOS_CENTERED_DISPLAY( display ),
             SDL_WINDOWPOS_CENTERED_DISPLAY( display ),
@@ -373,8 +377,8 @@ void WinCreate()
             window_flags
         ) );
     throwErrorIf( !::window, "SDL_CreateWindow failed" );
-
-#ifndef __ANDROID__
+#endif
+#if !defined __ANDROID__ && !defined __3DS__
     // On Android SDL seems janky in windowed mode so we're fullscreen all the time.
     // Fullscreen mode is now modified so it obeys terminal width/height, rather than
     // overwriting it with this calculation.
@@ -385,6 +389,7 @@ void WinCreate()
         TERMINAL_HEIGHT = WindowHeight / fontheight / scaling_factor;
     }
 #endif
+#ifndef __3DS__
     // Initialize framebuffer caches
     terminal_framebuffer.resize(TERMINAL_HEIGHT);
     for (int i = 0; i < TERMINAL_HEIGHT; i++) {
@@ -395,13 +400,15 @@ void WinCreate()
     for (int i = 0; i < TERMINAL_HEIGHT; i++) {
         oversized_framebuffer[i].chars.assign(TERMINAL_WIDTH, cursecell(""));
     }
+#endif
 
-    const Uint32 wformat = SDL_GetWindowPixelFormat( ::window.get() );
-    format.reset( SDL_AllocFormat( wformat ) );
+    const Uint32 wformat = 0x15441002;//SDL_GetWindowPixelFormat( ::window.get() );
+    SDL_PixelFormat* form = SDL_AllocFormat(wformat); 
+    format.reset( form );
     throwErrorIf( !format, "SDL_AllocFormat failed" );
 
     int renderer_id = -1;
-#ifndef __ANDROID__
+#if !defined __ANDROID__ && !defined __3DS__
     bool software_renderer = get_option<std::string>( "RENDERER" ).empty();
     std::string renderer_name;
     if( software_renderer ) {
@@ -420,8 +427,10 @@ void WinCreate()
             break;
         }
     }
-#else
+#elif !defined __3DS__
     bool software_renderer = get_option<bool>( "SOFTWARE_RENDERING" );
+#else
+    bool software_renderer = true;
 #endif
 
     if( !software_renderer ) {
@@ -2876,6 +2885,8 @@ static void save_font_list()
     wordexp("~/Library/Fonts", &exp, 0);
     font_folder_list(fout, exp.we_wordv[0], bitmap_fonts);
     wordfree(&exp);*/
+#elif defined __3DS__
+    font_folder_list(fout, "/data/font", bitmap_fonts);
 #else // Other POSIX-ish systems
     font_folder_list(fout, "/usr/share/fonts", bitmap_fonts);
     font_folder_list(fout, "/usr/local/share/fonts", bitmap_fonts);

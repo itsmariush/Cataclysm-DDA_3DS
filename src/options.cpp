@@ -1546,7 +1546,7 @@ void options_manager::add_options_graphics()
        );
 #endif
 
-#ifndef __ANDROID__
+#if !defined __ANDROID__
 #   ifndef TILES
     // No renderer selection in non-TILES mode
     add( "RENDERER", "graphics", translate_marker( "Renderer" ),
