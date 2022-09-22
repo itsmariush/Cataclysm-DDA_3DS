@@ -415,9 +415,10 @@ bool main_menu::opening_screen()
                 display_text( mmenu_credits, "Credits", sel_line );
             }
 
-            std::string action = handle_input_timeout( ctxt );
+            std::string action = "";//handle_input_timeout( ctxt );
 
-            std::string sInput = ctxt.get_raw_input().text;
+            std::string sInput = "";//ctxt.get_raw_input().text;
+#ifndef __3DS__
             // check automatic menu shortcuts
             for( size_t i = 0; i < vMenuHotkeys.size(); ++i ) {
                 for( const std::string &hotkey : vMenuHotkeys[i] ) {
@@ -427,6 +428,7 @@ bool main_menu::opening_screen()
                     }
                 }
             }
+#endif
             // also check special keys
             if( action == "QUIT" ) {
                 if( query_yn( _( "Really quit?" ) ) ) {

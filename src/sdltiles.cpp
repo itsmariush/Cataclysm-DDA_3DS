@@ -389,7 +389,6 @@ void WinCreate()
         TERMINAL_HEIGHT = WindowHeight / fontheight / scaling_factor;
     }
 #endif
-#ifndef __3DS__
     // Initialize framebuffer caches
     terminal_framebuffer.resize(TERMINAL_HEIGHT);
     for (int i = 0; i < TERMINAL_HEIGHT; i++) {
@@ -400,9 +399,8 @@ void WinCreate()
     for (int i = 0; i < TERMINAL_HEIGHT; i++) {
         oversized_framebuffer[i].chars.assign(TERMINAL_WIDTH, cursecell(""));
     }
-#endif
 
-    const Uint32 wformat = 0x15441002;//SDL_GetWindowPixelFormat( ::window.get() );
+    const Uint32 wformat = SDL_GetWindowPixelFormat( ::window.get() );
     SDL_PixelFormat* form = SDL_AllocFormat(wformat); 
     format.reset( form );
     throwErrorIf( !format, "SDL_AllocFormat failed" );
