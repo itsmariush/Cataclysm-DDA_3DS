@@ -69,6 +69,10 @@
 #include "inventory.h"
 #endif
 
+#ifdef __3DS__
+#include <3ds/console.h>
+#endif
+
 #define dbg(x) DebugLog((DebugLevel)(x),D_SDL) << __FILE__ << ":" << __LINE__ << ": "
 
 //***********************************
@@ -290,6 +294,10 @@ void InitSDL()
 #endif
 
     ret = SDL_Init( init_flags );
+#ifdef __3DS__
+    consoleInit(GFX_BOTTOM, NULL);
+    printf("\nRunning on 3DS\n");
+#endif
     throwErrorIf( ret != 0, "SDL_Init failed" );
 
     ret = TTF_Init();
@@ -2576,6 +2584,7 @@ void CheckMessages()
             }
             break;
             case SDL_JOYBUTTONDOWN:
+                printf("Joy button down %d\n", ev.jbutton.button);
                 last_input = input_event(ev.jbutton.button, CATA_INPUT_KEYBOARD);
             break;
             case SDL_JOYAXISMOTION: // on gamepads, the axes are the analog sticks
