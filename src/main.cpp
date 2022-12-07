@@ -2,8 +2,43 @@
  */
 
 #ifdef __3DS__
-    unsigned int __stacksize__=4*1024*1024;
-    unsigned int __ctru_heap_size = 64 * 1024 * 1024;
+// https://gbatemp.net/threads/how-to-use-extra-memory-in-had-2-5.401529/
+#include <3ds/svc.h>
+#include <3ds/allocator/mappable.h>
+#include <3ds/env.h>
+#include <3ds/os.h>
+#include <3ds/result.h>
+
+    extern char* fake_heap_start;
+    extern char* fake_heap_end;
+
+    u32 _my_ctru_heap;
+    u32 _my_ctru_linear_heap;
+
+    unsigned int __stacksize__=128*1024;
+    unsigned int _my_heap_size = 48 * 1024 * 1024;
+    unsigned int _my_linear_heap_size = 128 * 1024;
+    void __system_allocateHeaps(void) {
+        Result rc;
+        // Allocate the application heap
+        rc = svcControlMemory(&_my_ctru_heap, OS_HEAP_AREA_BEGIN, 0x0, _my_heap_size, MEMOP_ALLOC, (MemPerm) (MEMPERM_READ | MEMPERM_WRITE));
+        if (R_FAILED(rc))
+            svcBreak(USERBREAK_PANIC);
+
+        // Allocate the linear heap
+        rc = svcControlMemory(&_my_ctru_linear_heap, 0x0, 0x0, _my_linear_heap_size, MEMOP_ALLOC_LINEAR, (MemPerm) (MEMPERM_READ | MEMPERM_WRITE));
+        if (R_FAILED(rc))
+            svcBreak(USERBREAK_PANIC);
+
+        // Mappable allocator init
+        mappableInit(OS_MAP_AREA_BEGIN, OS_MAP_AREA_END);
+
+        // Set up newlib heap
+        fake_heap_start = (char*)_my_ctru_heap;
+        fake_heap_end = fake_heap_start + _my_heap_size;
+
+    }
+//TODO: overwrite __libctru_exit as well
 #endif
 
 #include <cstring>
