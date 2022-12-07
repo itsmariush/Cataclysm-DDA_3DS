@@ -365,10 +365,6 @@ void WinCreate()
     SDL_SetHint(SDL_HINT_ANDROID_SEPARATE_MOUSE_AND_TOUCH, "1");
 #endif
 
-#ifdef __3DS__
-    ::window.reset(
-            SDL_CreateWindow("Game", 0, 0, 640, 384, SDL_WINDOW_RESIZABLE | SDL_WINDOW_ALLOW_HIGHDPI | SDL_WINDOW_MAXIMIZED));
-#else
     ::window.reset( SDL_CreateWindow( version.c_str(),
             SDL_WINDOWPOS_CENTERED_DISPLAY( display ),
             SDL_WINDOWPOS_CENTERED_DISPLAY( display ),
@@ -377,7 +373,6 @@ void WinCreate()
             window_flags
         ) );
     throwErrorIf( !::window, "SDL_CreateWindow failed" );
-#endif
 #if !defined __ANDROID__ && !defined __3DS__
     // On Android SDL seems janky in windowed mode so we're fullscreen all the time.
     // Fullscreen mode is now modified so it obeys terminal width/height, rather than
@@ -801,15 +796,11 @@ void set_displaybuffer_rendertarget()
 void find_videodisplays() {
     std::map<int, std::string> displays;
 
-#if !defined __3DS__
     int numdisplays = SDL_GetNumVideoDisplays();
     for( int i = 0 ; i < numdisplays ; i++ ) {
         displays.insert( { i, SDL_GetDisplayName( i ) } );
     }
-#else
-    displays.insert( { 0, SDL_GetDisplayName( 2 ) } );
-    displays.insert( { 1, SDL_GetDisplayName( 3 ) } );
-#endif
+
     int current_display = get_option<int>( "DISPLAY" );
     get_options().add("DISPLAY", "graphics", _("Display"),
                       _("Sets which video display will be used to show the game. Requires restart."),
