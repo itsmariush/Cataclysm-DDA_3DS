@@ -3,6 +3,7 @@
 
 #ifdef __3DS__
     unsigned int __stacksize__=4*1024*1024;
+    unsigned int __ctru_heap_size = 64 * 1024 * 1024;
 #endif
 
 #include <cstring>
