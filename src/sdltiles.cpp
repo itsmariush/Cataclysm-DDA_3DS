@@ -2584,7 +2584,8 @@ void CheckMessages()
             }
             break;
             case SDL_JOYBUTTONDOWN:
-                last_input = input_event(ev.jbutton.button, CATA_INPUT_GAMEPAD);
+                printf("Joy button down %d\n", ev.jbutton.button);
+                last_input = input_event(ev.jbutton.button, CATA_INPUT_KEYBOARD);
             break;
             case SDL_JOYAXISMOTION: // on gamepads, the axes are the analog sticks
                 // TODO: somehow get the "digipad" values from the axes
