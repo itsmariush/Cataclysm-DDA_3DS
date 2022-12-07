@@ -1,8 +1,8 @@
 {
   "fontblending": false,
-  "fontwidth": 8,
-  "fontheight": 16,
-  "fontsize": 16,
+  "fontwidth": 5,
+  "fontheight": 10,
+  "fontsize": 8,
   "typeface": "unifont",
   "map_fontwidth": 8,
   "map_fontheight": 16,

@@ -1538,7 +1538,7 @@ void options_manager::add_options_graphics()
          0, 10000, 0, COPT_CURSES_HIDE
        );
 
-#if !defined __ANDROID__ && !defined __3DS__ // Android and 3DS are always fullscreen
+#if !defined __ANDROID__ //&& !defined __3DS__ // Android and 3DS are always fullscreen
     add( "FULLSCREEN", "graphics", translate_marker( "Fullscreen" ),
          translate_marker( "Starts Cataclysm in one of the fullscreen modes.  Requires restart." ),
     { { "no", translate_marker( "No" ) }, { "fullscreen", translate_marker( "Fullscreen" ) }, { "windowedbl", translate_marker( "Windowed borderless" ) } },
@@ -1595,7 +1595,7 @@ void options_manager::add_options_graphics()
     },
     "none", COPT_CURSES_HIDE );
 
-#if !defined __ANDROID__ && !defined __3DS__
+#if !defined __ANDROID__ //&& !defined __3DS__
     add( "SCALING_FACTOR", "graphics", translate_marker( "Scaling factor" ),
     translate_marker( "Factor by which to scale the display. Requires restart." ), {
         { "1", translate_marker( "1x" ) },

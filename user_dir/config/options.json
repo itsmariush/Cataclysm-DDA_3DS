@@ -1,1 +1,3 @@
-[]
+[
+  { "info": "Enable input from joystick.", "default": "Default: True", "name": "ENABLE_JOYSTICK", "value": "true" }
+]

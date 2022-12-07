@@ -339,7 +339,7 @@ void WinCreate()
         SDL_SetHint( SDL_HINT_RENDER_SCALE_QUALITY, get_option<std::string>( "SCALING_MODE" ).c_str() );
     }
 
-#if !defined __ANDROID__ && !defined __3DS__
+#if !defined __ANDROID__ //&& !defined __3DS__
     if (get_option<std::string>( "FULLSCREEN" ) == "fullscreen") {
         window_flags |= SDL_WINDOW_FULLSCREEN;
     } else if (get_option<std::string>( "FULLSCREEN" ) == "windowedbl") {
@@ -373,7 +373,7 @@ void WinCreate()
             window_flags
         ) );
     throwErrorIf( !::window, "SDL_CreateWindow failed" );
-#if !defined __ANDROID__ && !defined __3DS__
+#if !defined __ANDROID__ //&& !defined __3DS__
     // On Android SDL seems janky in windowed mode so we're fullscreen all the time.
     // Fullscreen mode is now modified so it obeys terminal width/height, rather than
     // overwriting it with this calculation.

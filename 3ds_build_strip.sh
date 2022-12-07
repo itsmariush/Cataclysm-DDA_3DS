@@ -1,0 +1,1 @@
+docker run --rm -it -v $(pwd):/source devkitarm_sdl /bin/sh -c "cd source/build; make -j`nproc`";  docker run --rm -it -v $(pwd):/source devkitarm_sdl /bin/sh -c "cd source/build/src; /opt/devkitpro/devkitARM/bin/arm-none-eabi-strip -o cataclysm-tiles.strip cataclysm-tiles.elf"
