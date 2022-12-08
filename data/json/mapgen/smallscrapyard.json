@@ -47,21 +47,7 @@
         { "chance": 10, "item": "supplies_spares_vehicle", "x": 16, "y": 15 },
         { "chance": 10, "item": "supplies_spares_vehicle", "x": 7, "y": 9 },
         { "chance": 10, "item": "supplies_spares_vehicle", "x": 20, "y": 6 },
-        { "chance": 10, "item": "supplies_spares_vehicle", "x": 4, "y": 4 },
-        { "chance": 15, "item": "vehicle_scrapped", "x": 18, "y": 20 },
-        { "chance": 15, "item": "vehicle_scrapped", "x": 16, "y": 20 },
-        { "chance": 15, "item": "vehicle_scrapped", "x": 4, "y": 19 },
-        { "chance": 15, "item": "vehicle_scrapped", "x": 16, "y": 18 },
-        { "chance": 15, "item": "vehicle_scrapped", "x": 22, "y": 16 },
-        { "chance": 15, "item": "vehicle_scrapped", "x": 14, "y": 16 },
-        { "chance": 15, "item": "vehicle_scrapped", "x": 9, "y": 15 },
-        { "chance": 15, "item": "vehicle_scrapped", "x": 3, "y": 14 },
-        { "chance": 15, "item": "vehicle_scrapped", "x": 15, "y": 9 },
-        { "chance": 15, "item": "vehicle_scrapped", "x": 3, "y": 9 },
-        { "chance": 15, "item": "vehicle_scrapped", "x": 16, "y": 7 },
-        { "chance": 15, "item": "vehicle_scrapped", "x": 17, "y": 5 },
-        { "chance": 15, "item": "vehicle_scrapped", "x": 6, "y": 5 },
-        { "chance": 15, "item": "vehicle_scrapped", "x": 8, "y": 4 }
+        { "chance": 10, "item": "supplies_spares_vehicle", "x": 4, "y": 4 }
       ],
       "rows": [
         "c$$$----........----$$$c",
@@ -169,14 +155,6 @@
         { "chance": 10, "item": "supplies_spares_vehicle", "x": 3, "y": 16 },
         { "chance": 10, "item": "supplies_spares_vehicle", "x": 16, "y": 15 },
         { "chance": 25, "item": "vending_drink", "x": 5, "y": 9 },
-        { "chance": 15, "item": "vehicle_scrapped", "x": 18, "y": 20 },
-        { "chance": 15, "item": "vehicle_scrapped", "x": 16, "y": 20 },
-        { "chance": 15, "item": "vehicle_scrapped", "x": 4, "y": 19 },
-        { "chance": 15, "item": "vehicle_scrapped", "x": 16, "y": 18 },
-        { "chance": 15, "item": "vehicle_scrapped", "x": 22, "y": 16 },
-        { "chance": 15, "item": "vehicle_scrapped", "x": 14, "y": 16 },
-        { "chance": 15, "item": "vehicle_scrapped", "x": 9, "y": 15 },
-        { "chance": 15, "item": "vehicle_scrapped", "x": 3, "y": 14 },
         { "chance": 10, "item": "tools_mechanic", "x": 5, "y": 5 }
       ],
       "rows": [

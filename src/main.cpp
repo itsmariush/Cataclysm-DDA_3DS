@@ -2,9 +2,11 @@
  */
 
 #ifdef __3DS__
+#include <3ds/svc.h>
+#include <3ds/result.h>
 // https://gbatemp.net/threads/how-to-use-extra-memory-in-had-2-5.401529/
-unsigned int __stacksize__= 256 * 1024;
-unsigned int __ctru_heap_size        = 106*1024*1024;
+unsigned int __stacksize__= 128 * 1024;
+unsigned int __ctru_heap_size        = 106*1024*1024 + 256 * 1024;
 unsigned int __ctru_linear_heap_size = (2 * 1024 * 1024) + (64 * 1024);
 #endif
 
@@ -677,7 +679,6 @@ int main( int argc, char *argv[] )
         set_language();
     }
 #endif
-
     while( true ) {
         if( !world.empty() ) {
             if( !g->load( world ) ) {

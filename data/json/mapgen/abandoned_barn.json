@@ -213,14 +213,6 @@
         "|": "f_null"
       },
       "place_items": [
-        { "chance": 33, "item": "building_rubble", "x": 13, "y": 19 },
-        { "chance": 33, "item": "building_rubble", "x": 14, "y": 19 },
-        { "chance": 33, "item": "building_rubble", "x": 19, "y": 17 },
-        { "chance": 33, "item": "building_rubble", "x": 19, "y": 18 },
-        { "chance": 33, "item": "building_rubble", "x": 6, "y": 14 },
-        { "chance": 33, "item": "building_rubble", "x": 7, "y": 14 },
-        { "chance": 33, "item": "building_rubble", "x": 8, "y": 14 },
-        { "chance": 33, "item": "building_rubble", "x": 13, "y": 11 },
         { "chance": 25, "item": "trash", "x": 19, "y": 19 },
         { "chance": 25, "item": "trash", "x": 15, "y": 15 },
         { "chance": 25, "item": "trash", "x": 20, "y": 12 },
@@ -414,21 +406,9 @@
         "|": "f_null"
       },
       "place_items": [
-        { "chance": 15, "item": "building_rubble", "x": 16, "y": 19 },
-        { "chance": 15, "item": "building_rubble", "x": 8, "y": 15 },
-        { "chance": 15, "item": "building_rubble", "x": 7, "y": 14 },
-        { "chance": 15, "item": "building_rubble", "x": 8, "y": 14 },
-        { "chance": 15, "item": "building_rubble", "x": 17, "y": 13 },
-        { "chance": 15, "item": "building_rubble", "x": 18, "y": 13 },
-        { "chance": 15, "item": "building_rubble", "x": 16, "y": 6 },
-        { "chance": 15, "item": "building_rubble", "x": 8, "y": 6 },
         { "chance": 25, "item": "trash", "x": 16, "y": 17 },
         { "chance": 25, "item": "trash", "x": 9, "y": 10 },
-        { "chance": 5, "item": "antique_guns_with_ammo", "x": 8, "y": 17 },
-        { "chance": 10, "item": "building_rubble", "x": 15, "y": 17 },
-        { "chance": 10, "item": "building_rubble", "x": 9, "y": 17 },
-        { "chance": 10, "item": "building_rubble", "x": 8, "y": 16 },
-        { "chance": 10, "item": "building_rubble", "x": 9, "y": 4 }
+        { "chance": 5, "item": "antique_guns_with_ammo", "x": 8, "y": 17 }
       ],
       "rows": [
         ".....d...........d......",
