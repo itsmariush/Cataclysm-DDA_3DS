@@ -10,6 +10,7 @@
 /WinDepend/
 /bindist/
 /build/
+/build_x86/
 /cmake-build-debug/
 /config/
 /data/*.template
@@ -36,6 +37,7 @@ cata_test
 cata_test-tiles
 cataclysm
 cataclysm-tiles
+cataclysm-tiles.x86
 cataclysm-vcpkg
 cataclysmdda-*
 chkjson*
