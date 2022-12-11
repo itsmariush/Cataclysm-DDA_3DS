@@ -1,5 +1,11 @@
 [
-
+  {
+    "type": "keybinding",
+    "name": "Main Menu",
+    "category": "DEFAULTMODE",
+    "id": "main_menu",
+    "bindings": [ { "input_method": "gamepad", "key": "JOY_3" } ]
+  },
   {
     "type": "keybinding",
     "id": "NEXT_TAB",
@@ -10,7 +16,7 @@
     "type": "keybinding",
     "id": "PREV_TAB",
     "name": "Go to prev tab",
-    "bindings": [ { "input_method": "keyboard", "key": "BACKTAB" } ]
+    "bindings": [ { "input_method": "keyboard", "key": "JOY_9" } ]
   },
   {
     "type": "keybinding",
