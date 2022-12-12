@@ -32,7 +32,7 @@
 // only can wear a maximum of two of any type of clothing
 #define MAX_WORN_PER_TYPE 2
 
-#define MAPSIZE 11
+#define MAPSIZE 9
 #define HALF_MAPSIZE static_cast<int>( MAPSIZE / 2 )
 
 // SEEX/SEEY define the size of a nonant, or grid.
