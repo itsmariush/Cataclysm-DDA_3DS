@@ -68,6 +68,12 @@ class mapbuffer
         inline submap_map_t::iterator end() {
             return submaps.end();
         }
+#ifdef __3DS__
+        // only used in 3DS build
+        inline int size() {
+            return submaps.size();
+        }
+#endif
 
     private:
         // There's a very good reason this is private,

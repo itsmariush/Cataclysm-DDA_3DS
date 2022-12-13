@@ -12033,6 +12033,13 @@ void game::update_map( player &p )
     int x = p.posx();
     int y = p.posy();
     update_map( x, y );
+#ifdef __3DS__
+    // due to limited RAM we have to "unload" unused submaps. saving will do that for now.
+    if(MAPBUFFER.size() >= 200) {
+        printf("3DS: Reduce MAPBUFFER %d\n", MAPBUFFER.size());
+        quicksave();
+    }
+#endif
 }
 
 point game::update_map( int &x, int &y )
