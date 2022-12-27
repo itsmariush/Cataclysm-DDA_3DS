@@ -171,14 +171,20 @@ struct action_attributes {
 // On the joystick there's a maximum of 256 key states.
 // So for joy axis events, we simply use a number larger
 // than that.
-#define JOY_0        0
-#define JOY_1        1
-#define JOY_2        2
-#define JOY_3        3
+#define JOY_0        0 // N3DS: A-Button
+#define JOY_1        1 // N3DS: B-Button
+#define JOY_2        2 // N3DS: Select-Button
+#define JOY_3        3 // N3DS: Start-Button
 #define JOY_4        4
 #define JOY_5        5
 #define JOY_6        6
 #define JOY_7        7
+#define JOY_8        8 // N3DS: R-Button
+#define JOY_9        9 // N3DS: L-Button
+#define JOY_10       10 // N3DS: X-Button
+#define JOY_11       11 // N3DS: Y-Button
+#define JOY_14       14 // N3DS: ZL-Button
+#define JOY_15       15 // N3DS: ZR-Button
 
 #define JOY_LEFT        256 + 1
 #define JOY_RIGHT       256 + 2

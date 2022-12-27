@@ -370,6 +370,12 @@ void input_manager::init_keycode_mapping()
     add_gamepad_keycode_pair( JOY_5,         "JOY_5" );
     add_gamepad_keycode_pair( JOY_6,         "JOY_6" );
     add_gamepad_keycode_pair( JOY_7,         "JOY_7" );
+    add_gamepad_keycode_pair( JOY_8,         "JOY_8" );
+    add_gamepad_keycode_pair( JOY_9,         "JOY_9" );
+    add_gamepad_keycode_pair( JOY_10,         "JOY_10" );
+    add_gamepad_keycode_pair( JOY_11,         "JOY_11" );
+    add_gamepad_keycode_pair( JOY_14,         "JOY_14" );
+    add_gamepad_keycode_pair( JOY_15,         "JOY_15" );
 
     keyname_to_keycode["MOUSE_LEFT"] = MOUSE_BUTTON_LEFT;
     keyname_to_keycode["MOUSE_RIGHT"] = MOUSE_BUTTON_RIGHT;

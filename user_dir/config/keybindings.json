@@ -4,7 +4,8 @@
     "name": "Main Menu",
     "category": "DEFAULTMODE",
     "id": "main_menu",
-    "bindings": [ { "input_method": "gamepad", "key": "JOY_3" } ]
+    "bindings": [ { "input_method": "keyboard", "key": "ESC" },
+                    { "input_method": "gamepad", "key": "JOY_3" } ]
   },
   {
     "type": "keybinding",
@@ -16,7 +17,35 @@
     "type": "keybinding",
     "id": "PREV_TAB",
     "name": "Go to prev tab",
-    "bindings": [ { "input_method": "keyboard", "key": "JOY_9" } ]
+    "bindings": [ { "input_method": "gamepad", "key": "JOY_9" } ]
+  },
+  {
+    "type": "keybinding",
+    "name": "Zoom In",
+    "category": "DEFAULTMODE",
+    "id": "zoom_in",
+    "bindings": [ { "input_method": "gamepad", "key": "JOY_9" } ]
+  },
+  {
+    "type": "keybinding",
+    "name": "Zoom Out",
+    "category": "DEFAULTMODE",
+    "id": "zoom_out",
+    "bindings": [ { "input_method": "gamepad", "key": "JOY_8" } ]
+  },
+  {
+    "type": "keybinding",
+    "name": "Ignore Nearby Enemy",
+    "category": "DEFAULTMODE",
+    "id": "ignore_enemy",
+    "bindings": [ { "input_method": "gamepad", "key": "JOY_2" } ]
+  },
+  {
+    "type": "keybinding",
+    "id": "look",
+    "category": "DEFAULTMODE",
+    "name": "look around",
+    "bindings": [ { "input_method": "gamepad", "key": "JOY_10" } ]
   },
   {
     "type": "keybinding",
