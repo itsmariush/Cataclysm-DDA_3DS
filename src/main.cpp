@@ -5,7 +5,7 @@
 // https://gbatemp.net/threads/how-to-use-extra-memory-in-had-2-5.401529/
 unsigned int __stacksize__= 512 * 1024;
 // heap space required to load a world, to much for real hardware, will probably crash
-unsigned int __ctru_heap_size        = 106*1024*1024;
+unsigned int __ctru_heap_size        = 103*1024*1024;
 // minimum amount of linear heap required seems to be 2MB 64 KB
 unsigned int __ctru_linear_heap_size = (2 * 1024 * 1024) + (64 * 1024);
 #endif
