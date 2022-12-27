@@ -1,15 +1,15 @@
 {
-  "fontblending": false,
+  "fontblending": true,
   "fontwidth": 5,
   "fontheight": 10,
-  "fontsize": 8,
-  "typeface": "unifont",
+  "fontsize": 10,
+  "typeface": "fixedsys",
   "map_fontwidth": 8,
   "map_fontheight": 16,
   "map_fontsize": 16,
-  "map_typeface": "unifont",
+  "map_typeface": "fixedsys",
   "overmap_fontwidth": 8,
   "overmap_fontheight": 16,
   "overmap_fontsize": 16,
-  "overmap_typeface": "unifont"
+  "overmap_typeface": "fixedsys"
 }
