@@ -413,7 +413,6 @@ void game::init_ui( const bool resized )
         //only set once, toggle action is used to change during game
         pixel_minimap_option = get_option<bool>( "PIXEL_MINIMAP" );
 #endif // TILES
-       printf("Init Ui first\n");
     }
 
 #ifdef __3DS__
@@ -584,6 +583,8 @@ void game::init_ui( const bool resized )
         }
         messHlong = TERRAIN_WINDOW_TERM_HEIGHT - ( statH + locH + stat2H );
 #endif
+        messHshort = 4;
+        messW = sidebarWidth;
         // Now position the elements relative to each other.
         minimapX = 0;
         minimapY = 0;
@@ -659,9 +660,11 @@ void game::init_ui( const bool resized )
                        _x + messX );
     werase( w_messages_short );
 
+#ifndef __3DS__
     w_messages_long = w_messages_long_ptr = catacurses::newwin( messHlong, messW, _y + messY,
                                             _x + messX );
     werase( w_messages_long );
+#endif
 
     w_pixel_minimap = w_pixel_minimap_ptr = catacurses::newwin( pixelminimapH, pixelminimapW,
                                             _y + pixelminimapY, _x + pixelminimapX );
@@ -698,6 +701,11 @@ void game::init_ui( const bool resized )
 
 void game::toggle_sidebar_style()
 {
+#ifdef __3DS__
+    // remove pixel_minimap before remove sidebar
+    if( (!narrow_sidebar  && pixel_minimap_option) || (narrow_sidebar && !pixel_minimap_option))
+        toggle_pixel_minimap();
+#endif
     narrow_sidebar = !narrow_sidebar;
 #ifdef TILES
     tilecontext->reinit_minimap();
@@ -721,6 +729,10 @@ void game::toggle_fullscreen()
 void game::toggle_pixel_minimap()
 {
 #ifdef TILES
+#ifdef __3DS__
+    if( narrow_sidebar )
+        return;
+#endif
     if( pixel_minimap_option ) {
         clear_window_area( w_pixel_minimap );
     }
@@ -3800,7 +3812,6 @@ void game::draw_sidebar()
 
 void game::draw_sidebar_messages()
 {
-#ifndef __3DS__
     if( fullscreen ) {
         return;
     }
@@ -3816,7 +3827,6 @@ void game::draw_sidebar_messages()
     int maxlength = getmaxx( w_messages );
     Messages::display_messages( w_messages, 0, topline, maxlength, line );
     wrefresh( w_messages );
-#endif
 }
 
 void game::draw_critter( const Creature &critter, const tripoint &center )
