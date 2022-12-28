@@ -729,5 +729,9 @@ void add_msg( std::string msg )
 
 void add_msg( game_message_type const type, std::string msg )
 {
+#ifdef __3DS__
+    if( type != m_debug)
+        printf("%s\n", msg.c_str());
+#endif
     Messages::add_msg( type, std::move( msg ) );
 }
