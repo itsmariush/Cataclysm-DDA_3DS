@@ -49,6 +49,13 @@
   },
   {
     "type": "keybinding",
+    "name": "View Map",
+    "category": "DEFAULTMODE",
+    "id": "map",
+    "bindings": [ { "input_method": "gamepad", "key": "JOY_11" } ]
+  },
+  {
+    "type": "keybinding",
     "id": "CONFIRM",
     "name": "Confirm Choice",
     "bindings": [ { "input_method": "keyboard", "key": "RETURN" },
@@ -75,6 +82,13 @@
     "category": "DEFAULTMODE",
     "id": "toggle_pixel_minimap",
     "bindings": [ { "input_method": "gamepad", "key": "JOY_14" } ]
+  },
+  {
+    "type": "keybinding",
+    "name": "Switch Sidebar Style",
+    "category": "DEFAULTMODE",
+    "id": "toggle_sidebar_style",
+    "bindings": [ { "input_method": "gamepad", "key": "JOY_15" } ]
   },
   {
     "type": "keybinding",

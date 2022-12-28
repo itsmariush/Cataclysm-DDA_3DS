@@ -415,7 +415,7 @@ void game::init_ui( const bool resized )
 #endif // TILES
     }
 
-    int sidebarWidth = narrow_sidebar ? 30 : 55;
+    int sidebarWidth = narrow_sidebar ? 0 : 45;
 
     // First get TERMX, TERMY
 #if (defined TILES || defined _WIN32 || defined __WIN32__)
@@ -443,7 +443,7 @@ void game::init_ui( const bool resized )
 
     // now that TERMX and TERMY are set,
     // check if sidebar style needs to be overridden
-    sidebarWidth = use_narrow_sidebar() ? 30 : 55;
+    sidebarWidth = use_narrow_sidebar() ? 0 : 45;
     if( fullscreen ) {
         sidebarWidth = 0;
     }
@@ -554,6 +554,7 @@ void game::init_ui( const bool resized )
 
     if( use_narrow_sidebar() ) {
         // First, figure out how large each element will be.
+#ifndef __3DS__
         hpH = 7;
         hpW = 14;
         statH = 7;
@@ -590,6 +591,7 @@ void game::init_ui( const bool resized )
         messY = stat2Y + stat2H;
         pixelminimapX = 0;
         pixelminimapY = messY + messHshort;
+#endif
     } else {
         // standard sidebar style
         locH = 3;
