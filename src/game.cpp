@@ -413,9 +413,14 @@ void game::init_ui( const bool resized )
         //only set once, toggle action is used to change during game
         pixel_minimap_option = get_option<bool>( "PIXEL_MINIMAP" );
 #endif // TILES
+       printf("Init Ui first\n");
     }
 
+#ifdef __3DS__
     int sidebarWidth = narrow_sidebar ? 0 : 45;
+#else
+    int sidebarWidth = narrow_sidebar ? 45 : 55;
+#endif
 
     // First get TERMX, TERMY
 #if (defined TILES || defined _WIN32 || defined __WIN32__)
@@ -443,7 +448,7 @@ void game::init_ui( const bool resized )
 
     // now that TERMX and TERMY are set,
     // check if sidebar style needs to be overridden
-    sidebarWidth = use_narrow_sidebar() ? 0 : 45;
+    sidebarWidth = use_narrow_sidebar() ? 45 : 55;
     if( fullscreen ) {
         sidebarWidth = 0;
     }
@@ -554,7 +559,9 @@ void game::init_ui( const bool resized )
 
     if( use_narrow_sidebar() ) {
         // First, figure out how large each element will be.
-#ifndef __3DS__
+#ifdef __3DS__
+        if( sidebarWidth > 0) {
+#endif
         hpH = 7;
         hpW = 14;
         statH = 7;
@@ -568,6 +575,7 @@ void game::init_ui( const bool resized )
         if( pixel_minimap_custom_height && pixelminimapH > get_option<int>( "PIXEL_MINIMAP_HEIGHT" ) ) {
             pixelminimapH = get_option<int>( "PIXEL_MINIMAP_HEIGHT" );
         }
+#ifndef __3DS__
         messHshort = TERRAIN_WINDOW_TERM_HEIGHT - ( statH + locH + stat2H + pixelminimapH );
         messW = sidebarWidth;
         if( messHshort < 9 ) {
@@ -575,7 +583,7 @@ void game::init_ui( const bool resized )
             messHshort = 9;
         }
         messHlong = TERRAIN_WINDOW_TERM_HEIGHT - ( statH + locH + stat2H );
-
+#endif
         // Now position the elements relative to each other.
         minimapX = 0;
         minimapY = 0;
@@ -591,6 +599,8 @@ void game::init_ui( const bool resized )
         messY = stat2Y + stat2H;
         pixelminimapX = 0;
         pixelminimapY = messY + messHshort;
+#ifdef __3DS__
+        }
 #endif
     } else {
         // standard sidebar style
@@ -658,9 +668,11 @@ void game::init_ui( const bool resized )
     werase( w_pixel_minimap );
 
     w_messages = w_messages_short;
+#ifndef __3DS__
     if( !pixel_minimap_option ) {
         w_messages = w_messages_long;
     }
+#endif
 
     w_location_wider = w_location_wider_ptr = catacurses::newwin( locH, locW + 10, _y + locY,
                        _x + locX - 7 );
@@ -3640,7 +3652,11 @@ void game::draw_sidebar()
     // w_status2 is not used with the wide sidebar (wide == !narrow)
     // Don't draw anything on it (no werase, wrefresh) in this case to avoid flickering
     // (it overlays other windows)
+#ifdef __3DS__
+    const bool sideStyle = true;
+#else
     const bool sideStyle = use_narrow_sidebar();
+#endif
 
     // Draw Status
     draw_HP( u, w_HP );
@@ -3784,6 +3800,7 @@ void game::draw_sidebar()
 
 void game::draw_sidebar_messages()
 {
+#ifndef __3DS__
     if( fullscreen ) {
         return;
     }
@@ -3799,6 +3816,7 @@ void game::draw_sidebar_messages()
     int maxlength = getmaxx( w_messages );
     Messages::display_messages( w_messages, 0, topline, maxlength, line );
     wrefresh( w_messages );
+#endif
 }
 
 void game::draw_critter( const Creature &critter, const tripoint &center )
