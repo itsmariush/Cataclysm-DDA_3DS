@@ -38,7 +38,7 @@
     "name": "Ignore Nearby Enemy",
     "category": "DEFAULTMODE",
     "id": "ignore_enemy",
-    "bindings": [ { "input_method": "gamepad", "key": "JOY_2" } ]
+    "bindings": [ { "input_method": "gamepad", "key": "JOY_1" } ]
   },
   {
     "type": "keybinding",
@@ -61,6 +61,20 @@
     "bindings": [
       { "input_method": "gamepad", "key": "JOY_1" }
     ]
+  },
+  {
+    "type": "keybinding",
+    "name": "Action Menu",
+    "category": "DEFAULTMODE",
+    "id": "action_menu",
+    "bindings": [ { "input_method": "gamepad", "key": "JOY_2" } ]
+  },
+  {
+    "type": "keybinding",
+    "name": "Toggle Pixel Minimap",
+    "category": "DEFAULTMODE",
+    "id": "toggle_pixel_minimap",
+    "bindings": [ { "input_method": "gamepad", "key": "JOY_14" } ]
   },
   {
     "type": "keybinding",
