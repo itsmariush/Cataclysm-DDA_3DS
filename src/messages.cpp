@@ -727,11 +727,27 @@ void add_msg( std::string msg )
     Messages::add_msg( std::move( msg ) );
 }
 
+#ifdef __3DS__
+void print_console(game_message_type const type, std::string msg)
+{
+    if( type == m_good) {
+        printf("\x1b[32m%s\x1b[0m\n", msg.c_str());
+    }
+    else if( type == m_warning) {
+        printf("\x1b[33m%s\x1b[0m\n", msg.c_str());
+    }
+    else if( type == m_bad) {
+        printf("\x1b[31m%s\x1b[0m\n", msg.c_str());
+    } else
+        printf("%s\n", msg.c_str());
+}
+#endif
+
 void add_msg( game_message_type const type, std::string msg )
 {
 #ifdef __3DS__
-    if( type != m_debug)
-        printf("%s\n", msg.c_str());
+    if( type != m_debug )
+        print_console(type, msg);
 #endif
     Messages::add_msg( type, std::move( msg ) );
 }

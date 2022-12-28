@@ -87,7 +87,7 @@
   },
   { "info": "Switch between sidebar on the left or on the right side.  Requires restart.", "default": "Default: right - Values: left, right", "name": "SIDEBAR_POSITION", "value": "right"
   },
-  { "info": "Switch between a narrower or wider sidebar.", "default": "Default: narrow - Values: wider, narrow", "name": "SIDEBAR_STYLE", "value": "narrow"
+  { "info": "Switch between a narrower or wider sidebar.", "default": "Default: narrow - Values: wider, narrow", "name": "SIDEBAR_STYLE", "value": "wider"
   },
   { "info": "Where new log messages should show.", "default": "Default: new_bottom - Values: new_top, new_bottom", "name": "LOG_FLOW", "value": "new_bottom"
   },
@@ -135,15 +135,15 @@
   },
   { "info": "Choose the tileset you want to use.", "default": "Default: retroascii - Values: retroascii", "name": "TILES", "value": "retroascii"
   },
-  { "info": "If true, shows the pixel-detail minimap in game after the save is loaded.  Use the 'Toggle Pixel Minimap' action key to change its visibility during gameplay.", "default": "Default: True", "name": "PIXEL_MINIMAP", "value": "false"
+  { "info": "If true, shows the pixel-detail minimap in game after the save is loaded.  Use the 'Toggle Pixel Minimap' action key to change its visibility during gameplay.", "default": "Default: True", "name": "PIXEL_MINIMAP", "value": "true"
   },
   { "info": "Specified the mode in which the minimap drawn.", "default": "Default: dots - Values: solid, squares, dots", "name": "PIXEL_MINIMAP_MODE", "value": "dots"
   },
   { "info": "Overall brightness of pixel-detail minimap.", "default": "Default: 100 - Min: 10, Max: 300", "name": "PIXEL_MINIMAP_BRIGHTNESS", "value": "100"
   },
-  { "info": "Height of pixel-detail minimap, measured in terminal rows.  Set to 0 for default spacing.", "default": "Default: 0 - Min: 0, Max: 100", "name": "PIXEL_MINIMAP_HEIGHT", "value": "0"
+  { "info": "Height of pixel-detail minimap, measured in terminal rows.  Set to 0 for default spacing.", "default": "Default: 0 - Min: 0, Max: 100", "name": "PIXEL_MINIMAP_HEIGHT", "value": "13"
   },
-  { "info": "Preserves the square shape of tiles shown on the pixel minimap.", "default": "Default: True", "name": "PIXEL_MINIMAP_RATIO", "value": "true"
+  { "info": "Preserves the square shape of tiles shown on the pixel minimap.", "default": "Default: True", "name": "PIXEL_MINIMAP_RATIO", "value": "false"
   },
   { "info": "Controls how fast the enemy beacons blink on the pixel minimap.  Value is multiplied by 200 ms.  Set to 0 to disable.", "default": "Default: 10 - Min: 0, Max: 50", "name": "PIXEL_MINIMAP_BLINK", "value": "10"
   },
@@ -199,7 +199,7 @@
   },
   { "info": "Determines how much damage monsters can take.  A higher value makes monsters more resilient and a lower makes them more flimsy.", "default": "Default: 100 - Min: 1, Max: 1000", "name": "MONSTER_RESILIENCE", "value": "100%"
   },
-  { "info": "( WIP feature ) Determines terrain, shops, plants, and more.", "default": "Default: default - Values: default", "name": "DEFAULT_REGION", "value": "default"
+  { "info": "( WIP feature ) Determines terrain, shops, plants, and more.", "default": "Default: default - Values: default, desert_test", "name": "DEFAULT_REGION", "value": "default"
   },
   { "info": "Initial starting time of day on character generation.", "default": "Default: 8 - Min: 0, Max: 23", "name": "INITIAL_TIME", "value": "8"
   },
