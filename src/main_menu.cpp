@@ -298,8 +298,17 @@ void main_menu::init_strings()
         vSettingsHotkeys.push_back( get_hotkeys( item ) );
     }
 
+#ifdef __3DS__
+    printf("Init Strings: mostly done successful\n");
+#endif
     loading_ui ui( false );
+#ifdef __3DS__
+    printf("Init Strings: loading_ui successful\n");
+#endif
     g->load_core_data( ui );
+#ifdef __3DS__
+    printf("Init Strings: load_core_data successful\n");
+#endif
     vdaytip = SNIPPET.random_from_category( "tip" );
 }
 
@@ -358,29 +367,55 @@ bool main_menu::opening_screen()
     world_generator->set_active_world( nullptr );
     world_generator->init();
 
+#ifdef __3DS__
+    printf("Menu: world_generator successful\n");
+#endif
     get_help().load();
+#ifdef __3DS__
+    printf("Menu: get_help successful\n");
+#endif
     init_windows();
+#ifdef __3DS__
+    printf("Menu: init_windows successful\n");
+#endif
     init_strings();
+#ifdef __3DS__
+    printf("Menu: init_Strings successful\n");
+#endif
     print_menu( w_open, 0, iMenuOffsetX, iMenuOffsetY );
-
+#ifdef __3DS__
+    printf("Menu: print_menu successful\n");
+#endif
     if( !assure_dir_exist( FILENAMES["config_dir"] ) ) {
-        popup( _( "Unable to make config directory. Check permissions." ) );
-        return false;
+        //popup( _( "Unable to make config directory. Check permissions." ) );
+#ifdef __3DS__
+        printf("Menu: no config dir found\n");
+#endif
+        //return false;
     }
 
     if( !assure_dir_exist( FILENAMES["savedir"] ) ) {
-        popup( _( "Unable to make save directory. Check permissions." ) );
-        return false;
+        //popup( _( "Unable to make save directory. Check permissions." ) );
+#ifdef __3DS__
+        printf("Menu: no savedir found\n");
+#endif
+        //return false;
     }
 
     if( !assure_dir_exist( FILENAMES["templatedir"] ) ) {
-        popup( _( "Unable to make templates directory. Check permissions." ) );
-        return false;
+        //popup( _( "Unable to make templates directory. Check permissions." ) );
+#ifdef __3DS__
+        printf("Menu: templatedir not found\n");
+#endif
+        //return false;
     }
 
     if( !assure_dir_exist( FILENAMES["user_sound"] ) ) {
-        popup( _( "Unable to make sound directory. Check permissions." ) );
-        return false;
+        //popup( _( "Unable to make sound directory. Check permissions." ) );
+#ifdef __3DS__
+        printf("Menu: user_sound not found\n");
+#endif
+        //return false;
     }
 
     load_char_templates();

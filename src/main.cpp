@@ -3,11 +3,11 @@
 
 #ifdef __3DS__
 // https://gbatemp.net/threads/how-to-use-extra-memory-in-had-2-5.401529/
-unsigned int __stacksize__= 512 * 1024;
 // heap space required to load a world, to much for real hardware, will probably crash
-unsigned int __ctru_heap_size        = 103*1024*1024;
+//unsigned int __ctru_heap_size        = 100*1024*1024;
 // minimum amount of linear heap required seems to be 2MB 64 KB
-unsigned int __ctru_linear_heap_size = (2 * 1024 * 1024) + (64 * 1024);
+//unsigned int __ctru_linear_heap_size = (4 * 1024 * 1024);
+unsigned int __stacksize__= 512 * 1024;
 #endif
 
 #include <cstring>
@@ -44,6 +44,10 @@ unsigned int __ctru_linear_heap_size = (2 * 1024 * 1024) + (64 * 1024);
 #   else
 #      include <SDL_version.h>
 #   endif
+#endif
+
+#ifdef __3DS__
+#include <3ds/console.h>
 #endif
 
 #ifdef __ANDROID__
@@ -644,12 +648,21 @@ int main( int argc, char *argv[] )
         debugmsg( "%s", err.what() );
         exit_handler( -999 );
     }
+#ifdef __3DS__
+    printf("Main: Init succesfull\n");
+#endif
 
     // Now we do the actual game.
 
     g->init_ui();
 
+#ifdef __3DS__
+    printf("Main: Init UI succesfull\n");
+#endif
     catacurses::curs_set( 0 ); // Invisible cursor here, because MAPBUFFER.load() is crash-prone
+#ifdef __3DS__
+    printf("Main: curs_set succesfull\n");
+#endif
 
 #if (!(defined _WIN32 || defined WINDOWS)) && !defined __3DS__
     struct sigaction sigIntHandler;
@@ -687,6 +700,9 @@ int main( int argc, char *argv[] )
             world.clear(); // ensure quit returns to opening screen
 
         } else {
+#ifdef __3DS__
+            printf("Main: Init main menu\n");
+#endif
             main_menu menu;
             if( !menu.opening_screen() ) {
                 break;

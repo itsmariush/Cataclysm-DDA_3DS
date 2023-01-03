@@ -363,7 +363,9 @@ void DynamicDataLoader::load_data_from_path( const std::string &path, const std:
     // E.g. the core might provide a vpart "frame-x"
     // the first loaded mode might provide a vehicle that uses that frame
     // But not the other way round.
-
+#ifdef __3DS__
+    printf("DynamicLoader: Start to load files from %s\n", path.c_str());
+#endif
     // get a list of all files in the directory
     str_vec files = get_files_from_path( ".json", path, true, true );
     if( files.empty() ) {
@@ -374,6 +376,9 @@ void DynamicDataLoader::load_data_from_path( const std::string &path, const std:
             files.push_back( path );
         }
     }
+#ifdef __3DS__
+    printf("DynamicLoader: Iterate over files\n");
+#endif
     // iterate over each file
     for( auto &files_i : files ) {
         const std::string &file = files_i;
@@ -388,9 +393,15 @@ void DynamicDataLoader::load_data_from_path( const std::string &path, const std:
         );
         try {
             // parse it
+#ifdef __3DS__
+            printf("DynamicLoader: Parse json file: %s path: %s src: %s\n", file.c_str(), path.c_str(), src.c_str());
+#endif
             JsonIn jsin( iss );
             load_all_from_json( jsin, src, ui, path, file );
         } catch( const JsonError &err ) {
+#ifdef __3DS__
+            printf("DynamicLoader: Error!!!! parsing json %s\nWhat: %s", file.c_str(), err.what());
+#endif
             throw std::runtime_error( file + ": " + err.what() );
         }
     }

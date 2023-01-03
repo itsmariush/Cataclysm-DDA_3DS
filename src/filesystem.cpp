@@ -304,8 +304,14 @@ std::vector<std::string> find_file_if_bfs( const std::string &root_path,
             if( is_special_dir( entry ) ) {
                 return;
             }
-
+#ifdef __3DS__
+            std::string sep = "/";
+            if(entry.d_name[0] == '/' || path.back() == '/')
+                sep = ""; 
+            const auto full_path = path + sep + entry.d_name;
+#else
             const auto full_path = path + "/" + entry.d_name;
+#endif
 
             // don't add files ending in '~'.
             if( full_path.back() == '~' ) {

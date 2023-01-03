@@ -355,17 +355,28 @@ void game::load_core_data( loading_ui &ui )
     DynamicDataLoader::get_instance().unload_data();
 
     init_lua();
+#ifdef __3DS__
+    printf("Game: init_lua successful\n");
+#endif
     load_data_from_dir( FILENAMES[ "jsondir" ], "core", ui );
 }
 
 void game::load_data_from_dir( const std::string &path, const std::string &src, loading_ui &ui )
 {
+#ifdef __3DS__
+    printf("Game: Load data from %s\n", path.c_str());
+#endif
     // Process a preload file before the .json files,
     // so that custom IUSE's can be defined before
     // the items that need them are parsed
     lua_loadmod( path, "preload.lua" );
-
+#ifdef __3DS__
+    printf("Game: lua_loadmod successfull\n");
+#endif
     DynamicDataLoader::get_instance().load_data_from_path( path, src, ui );
+#ifdef __3DS__
+    printf("Game: DynamicDataLoader load_data_from_path successfull\n");
+#endif
 
     // main.lua will be executed after JSON, allowing to
     // work with items defined by mod's JSON
