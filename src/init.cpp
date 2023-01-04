@@ -393,9 +393,6 @@ void DynamicDataLoader::load_data_from_path( const std::string &path, const std:
         );
         try {
             // parse it
-#ifdef __3DS__
-            printf("DynamicLoader: Parse json file: %s path: %s src: %s\n", file.c_str(), path.c_str(), src.c_str());
-#endif
             JsonIn jsin( iss );
             load_all_from_json( jsin, src, ui, path, file );
         } catch( const JsonError &err ) {

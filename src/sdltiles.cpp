@@ -72,7 +72,91 @@
 #ifdef __3DS__
 #include <3ds/console.h>
 #endif
+/*
+#ifdef __3DS__
+#include <3ds/svc.h>
+#include <3ds/allocator/mappable.h>
+#include <3ds/env.h>
+#include <3ds/os.h>
+#include <3ds/result.h>
+extern char* fake_heap_start;
+extern char* fake_heap_end;
 
+long unsigned int __my_heap_size        = 82 << 20;
+long unsigned int __my_linear_heap_size = 1 << 20;
+unsigned int __stacksize__= 512 * 1024;
+
+u32 __ctru_heap2;
+u32 __ctru_linear_heap2;
+
+#define HEAP_SPLIT_SIZE_CAP  (24 << 20) // 24MB
+#define LINEAR_HEAP_SIZE_CAP (32 << 20) // 32MB
+
+void __system_allocateHeaps() {
+	Result rc;
+
+	// Retrieve handle to the resource limit object for our process
+	Handle reslimit = 0;
+	rc = svcGetResourceLimit(&reslimit, CUR_PROCESS_HANDLE);
+	if (R_FAILED(rc))
+		svcBreak(USERBREAK_PANIC);
+
+	// Retrieve information about total/used memory
+	s64 maxCommit = 0, currentCommit = 0;
+	ResourceLimitType reslimitType = RESLIMIT_COMMIT;
+	svcGetResourceLimitLimitValues(&maxCommit, reslimit, &reslimitType, 1); // for APPLICATION this is equal to APPMEMALLOC at all times
+	svcGetResourceLimitCurrentValues(&currentCommit, reslimit, &reslimitType, 1);
+	svcCloseHandle(reslimit);
+
+	// Calculate how much remaining free memory is available
+	u32 remaining = (u32)(maxCommit - currentCommit) &~ 0xFFF;
+
+    
+	if (__my_heap_size + __my_linear_heap_size > remaining)
+		svcBreak(USERBREAK_PANIC);
+    
+	if (__my_heap_size == 0 && __my_linear_heap_size == 0) {
+		// Split available memory equally between linear and application heaps (with rounding in favor of the latter)
+		__my_linear_heap_size = (remaining / 2) & ~0xFFF;
+		__my_heap_size = remaining - __my_linear_heap_size;
+
+		// If the application heap size is bigger than the cap, prefer to grow linear heap instead
+		if (__my_heap_size > HEAP_SPLIT_SIZE_CAP) {
+			__my_heap_size = HEAP_SPLIT_SIZE_CAP;
+			__my_linear_heap_size = remaining - __my_heap_size;
+
+			// However if the linear heap size is bigger than the cap, prefer to grow application heap
+			if (__my_linear_heap_size > LINEAR_HEAP_SIZE_CAP) {
+				__my_linear_heap_size = LINEAR_HEAP_SIZE_CAP;
+				__my_heap_size = remaining - __my_linear_heap_size;
+			}
+		}
+	} else if (__my_heap_size == 0) {
+		__my_heap_size = remaining - __my_linear_heap_size;
+	} else if (__my_linear_heap_size == 0) {
+		__my_linear_heap_size = remaining - __my_heap_size;
+	}
+
+	// Allocate the application heap
+	rc = svcControlMemory(&__ctru_heap2, OS_HEAP_AREA_BEGIN, 0x0, __my_heap_size, MEMOP_ALLOC, (MemPerm)(MEMPERM_READ | MEMPERM_WRITE));
+	if (R_FAILED(rc))
+		svcBreak(USERBREAK_PANIC);
+
+	// Allocate the linear heap
+	rc = svcControlMemory(&__ctru_linear_heap2, 0x0, 0x0, __my_linear_heap_size, MEMOP_ALLOC_LINEAR, (MemPerm)(MEMPERM_READ | MEMPERM_WRITE));
+	if (R_FAILED(rc))
+		svcBreak(USERBREAK_PANIC);
+
+	// Mappable allocator init
+	mappableInit(OS_MAP_AREA_BEGIN, OS_MAP_AREA_END);
+
+	// Set up newlib heap
+	fake_heap_start = (char*)__ctru_heap2;
+	fake_heap_end = fake_heap_start + __my_heap_size;
+
+}
+#endif
+*/
 #define dbg(x) DebugLog((DebugLevel)(x),D_SDL) << __FILE__ << ":" << __LINE__ << ": "
 
 //***********************************

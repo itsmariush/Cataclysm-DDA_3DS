@@ -1,13 +1,14 @@
 /* Entry point and main loop for Cataclysm
  */
 
+
 #ifdef __3DS__
 // https://gbatemp.net/threads/how-to-use-extra-memory-in-had-2-5.401529/
 // heap space required to load a world, to much for real hardware, will probably crash
-//unsigned int __ctru_heap_size        = 100*1024*1024;
+long unsigned int __ctru_heap_size        = 96 << 20;
 // minimum amount of linear heap required seems to be 2MB 64 KB
-//unsigned int __ctru_linear_heap_size = (4 * 1024 * 1024);
-unsigned int __stacksize__= 512 * 1024;
+long unsigned int __ctru_linear_heap_size = 3 << 20;
+long unsigned int __stacksize__= 512 * 1024;
 #endif
 
 #include <cstring>
@@ -38,16 +39,13 @@ unsigned int __stacksize__= 512 * 1024;
 #include "rng.h"
 #include "translations.h"
 
+
 #ifdef TILES
 #   if defined(_MSC_VER) && defined(USE_VCPKG)
 #      include <SDL2/SDL_version.h>
 #   else
 #      include <SDL_version.h>
 #   endif
-#endif
-
-#ifdef __3DS__
-#include <3ds/console.h>
 #endif
 
 #ifdef __ANDROID__

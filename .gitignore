@@ -1,6 +1,5 @@
 !src/chkjson
 *.7z
-*.a
 *.d
 *.dll
 *.exe
