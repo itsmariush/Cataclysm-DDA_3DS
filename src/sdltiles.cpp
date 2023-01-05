@@ -2228,6 +2228,12 @@ void android_vibrate() {
 }
 #endif
 
+#ifdef __3DS__
+    int JOY_DEADZONE = 2000;
+    bool is_joymove = false;
+    int lastJoyPos = 0;
+#endif
+
 //Check for any window messages (keypress, paint, mousemove, etc)
 void CheckMessages()
 {
@@ -2235,6 +2241,9 @@ void CheckMessages()
     bool quit = false;
     bool text_refresh = false;
     bool is_repeat = false;
+#ifdef __3DS__
+    bool is_newjoymove = false;
+#endif
     if(HandleDPad()) {
         return;
     }
@@ -2672,6 +2681,42 @@ void CheckMessages()
             break;
             case SDL_JOYAXISMOTION: // on gamepads, the axes are the analog sticks
                 // TODO: somehow get the "digipad" values from the axes
+#ifdef __3DS__
+                printf("JOY AXIS: %d Value: %d timestamp: %d\n", ev.jaxis.axis, ev.jaxis.value, ev.jaxis.timestamp);
+                if(ev.jaxis.axis == 0) { // left-right
+                    if(ev.jaxis.value < -JOY_DEADZONE && !is_joymove) { // left
+                        last_input = input_event(JOY_LEFT, CATA_INPUT_GAMEPAD);
+                        lastJoyPos = JOY_LEFT;
+                        is_joymove = true;
+                        is_newjoymove = true;
+                    } else if(ev.jaxis.value > JOY_DEADZONE && !is_joymove) { // right
+                        last_input = input_event(JOY_RIGHT, CATA_INPUT_GAMEPAD);
+                        lastJoyPos = JOY_RIGHT;
+                        is_joymove = true;
+                        is_newjoymove = true;
+                    } else {
+                        is_joymove = false;
+                        lastJoyPos = 0;
+                    }
+                }
+                if(ev.jaxis.axis == 1) { // up-down
+                    if(ev.jaxis.value < -JOY_DEADZONE && !is_joymove) { // up
+                        last_input = input_event(JOY_UP, CATA_INPUT_GAMEPAD);
+                        lastJoyPos = JOY_UP;
+                        is_joymove = true;
+                        is_newjoymove = true;
+                    } else if(ev.jaxis.value > JOY_DEADZONE && !is_joymove) { //down
+                        last_input = input_event(JOY_DOWN, CATA_INPUT_GAMEPAD);
+                        lastJoyPos = JOY_DOWN;
+                        is_joymove = true;
+                        is_newjoymove = true;
+                    } else {
+                        is_joymove = false;
+                        lastJoyPos = 0;
+                    }
+
+                }
+#endif
             break;
             case SDL_MOUSEMOTION:
                 if (get_option<std::string>( "HIDE_CURSOR" ) == "show" || get_option<std::string>( "HIDE_CURSOR" ) == "hidekb") {
@@ -2864,6 +2909,12 @@ void CheckMessages()
             break;
         }
     }
+#ifdef __3DS__
+    if( !is_newjoymove && is_joymove ) { 
+        printf("Still joymove!!!!!!!\n");
+        last_input = input_event(lastJoyPos, CATA_INPUT_GAMEPAD);
+    }
+#endif
     if (needupdate) {
         try_sdl_update();
     }
