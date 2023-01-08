@@ -581,20 +581,24 @@ void game::init_ui( const bool resized )
         stat2H = 2;
         stat2W = sidebarWidth;
         pixelminimapW = sidebarWidth;
+#ifndef __3DS__
         pixelminimapH = ( pixelminimapW / 2 );
         if( pixel_minimap_custom_height && pixelminimapH > get_option<int>( "PIXEL_MINIMAP_HEIGHT" ) ) {
             pixelminimapH = get_option<int>( "PIXEL_MINIMAP_HEIGHT" );
         }
-#ifndef __3DS__
         messHshort = TERRAIN_WINDOW_TERM_HEIGHT - ( statH + locH + stat2H + pixelminimapH );
         messW = sidebarWidth;
         if( messHshort < 9 ) {
             pixelminimapH -= 9 - messHshort;
             messHshort = 9;
         }
-        messHlong = TERRAIN_WINDOW_TERM_HEIGHT - ( statH + locH + stat2H );
 #endif
-        messHshort = 4;
+#ifdef __3DS__
+        if( pixel_minimap_option ) {
+            messHshort = 4;
+        }
+#endif
+        messHlong = TERRAIN_WINDOW_TERM_HEIGHT - ( statH + locH + stat2H );
         messW = sidebarWidth;
         // Now position the elements relative to each other.
         minimapX = 0;
